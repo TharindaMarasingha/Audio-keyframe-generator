@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-DVWK28FQ1F"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-DVWK28FQ1F");
+    </script>
+    <script>
+      // Request https
+      if (location.protocol != 'https:')
+      {
+       location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      }
+    </script>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <title>Audio to keyframe string</title>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <link rel="canonical" href="https://audio-keyframe-generator.glitch.me/" />
+    <meta
+      name="description"
+      content="Generates keyframe strings for AI notebooks using audio volume."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="Audio keyframe generator" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://audio-keyframe-generator.glitch.me/" />
+    <meta
+      property="og:description"
+      content="Generates keyframe strings for AI notebooks using audio volume."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="stylesheet" href="style.css" />
+    
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.js"
+      integrity="sha512-+KihqiIrhYt4/tFb42KiOJ+wr0PM6dVMw9twO1Ju+sZ0OdgurvE/9dy2jAS0Fr0MCVryF2EXxPH9HRXg6CaFgg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content" role="main">
+        <h1>Audio to keyframe string generator</h1>
+        <span
+          >This tool is used to generate strings for the keyframes of AI
+          animation notebooks, such as
+          <a
+            href="https://colab.research.google.com/github/chigozienri/VQGAN-CLIP-animations/blob/main/VQGAN-CLIP-animations.ipynb"
+            >this one</a
+          >, using the volume of audio tracks. <b>Using the Chrome browser is recommended.</b></span
+        >
+        <div class="step" id="step1">
+          <h2>Step 1: Choose an audio file to analyse:</h2>
+          <div class="substep">
+            Try using individual stems, or just the right channel, or a bandpass filter. If it's a large file, it might take a while to load, so be patient!
+          </div>
+          <div class="substep">
+            <input type="file" id="audio" accept="audio/*" />
+          </div>
+          <div class="substep"><audio id="playback" controls></audio></div>
+        </div>
+        <div class="step" id="step2">
+          <h2>Step 2: Choose parameters:</h2>
+          <div class="substep">
+            'Framerate' controls how coarse the sampling is. For example, if the
+            audio is 2 seconds long, and the fps is 12, then there will be 24
+            samples/frames.
+          </div>
+          <div class="substep">
+              'Function' is a function (in normal mathematical notation) to
+              apply to each frame value, where '<tt>x</tt>' is the original amplitude
+              between 0 and 1. You can also use '<tt>y</tt>' to indicate the frame
+              number.<br />
+              For example, if you just put in '<tt>x</tt>', you will get the raw volume
+              of the frame between 0 and 1. If you put in '<tt>1 + x^4 +
+              sin(pi*y/12)</tt>', you will get a baseline sine wave with a period of
+              2 seconds (assuming an fps of 12), plus the amplitude to the 4th
+              power, plus 1).
+          </div>
+          <div class="substep">
+            <label for="framerate">Framerate (fps)</label>
+            <input id="framerate" />
+          </div>
+          <div class="substep">
+            <label for="fn">Function</label> <input id="fn" />
+          </div>
+        </div>
+        <div class="step" id="step3">
+          <h2>Step 3: Copy string:</h2>
+          <span>If PyTTI format is checked, it will attempt to make a function that PyTTI will understand, but it is experimental. Let me know if you try it out.</span>
+          
+          <div class="substep">
+            <label for="format">Format</label>
+            <select name="format">
+              <option value="disco" selected>Disco</option>
+              <option value="pytti">PyTTI</option>
+              <option value="csv">CSV</option>
+            </select>
+          </div>
+          <div id="outputcontainer">
+            <textarea id="output" readonly="true">Output string will appear here</textarea>
+            <button id="copy">Copy string</button>
+          </div>
+        </div>
+        <div class="step" id="step4">
+          <h2>
+            Step 4 (optional): Edit further using
+            <a href="https://chigozie.co.uk/keyframe-string-generator"
+              >https://chigozie.co.uk/keyframe-string-generator</a
+            >
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="links">
+      <a href="https://twitter.com/chigozienri">
+        <svg
+          width="22"
+          height="18"
+          viewBox="0 0 22 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+          role="none"
+          class="twtr-color-fill--blue-logo"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M7.04128 17.7861C4.53883 17.7861 2.21078 17.0602 0.25 15.8165C0.596807 15.857 0.949401 15.8773 1.30683 15.8773C3.38266 15.8773 5.29282 15.1764 6.80944 14.0003C4.87 13.9646 3.23461 12.6968 2.67056 10.9547C2.94041 11.0059 3.21803 11.0338 3.50342 11.0338C3.90767 11.0338 4.2993 10.9798 4.67133 10.8796C2.64431 10.4775 1.11689 8.70468 1.11689 6.5808C1.11689 6.56156 1.11689 6.54327 1.11792 6.52489C1.71505 6.85368 2.39787 7.05133 3.12448 7.07347C1.93514 6.28783 1.15299 4.94488 1.15299 3.42361C1.15299 2.62053 1.37213 1.86754 1.75297 1.21971C3.93781 3.87277 7.20298 5.61776 10.885 5.80097C10.8091 5.47987 10.7701 5.14535 10.7701 4.80118C10.7701 2.38039 12.7543 0.416626 15.2012 0.416626C16.4753 0.416626 17.6267 0.949734 18.4351 1.80197C19.4444 1.60535 20.392 1.23997 21.2484 0.737722C20.9172 1.76154 20.2148 2.62053 19.3002 3.1633C20.1963 3.0572 21.0506 2.82194 21.8444 2.47297C21.2512 3.35223 20.4993 4.12445 19.6342 4.7433C19.643 4.93129 19.6469 5.12031 19.6469 5.31018C19.6469 11.1042 15.1905 17.7861 7.04128 17.7861Z"
+            fill="#1DA1F2"
+          ></path>
+        </svg>
+        @chigozienri
+      </a>
+      <a href="https://github.com/chigozienri">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-github"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+        @chigozienri
+      </a>
+    </div>
+
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script>
+      kofiWidgetOverlay.draw("chigozie", {
+        type: "floating-chat",
+        "floating-chat.donateButton.text": "Support me",
+        "floating-chat.donateButton.background-color": "#00b9fe",
+        "floating-chat.donateButton.text-color": "#fff",
+      });
+    </script>
+  </body>
+</html>

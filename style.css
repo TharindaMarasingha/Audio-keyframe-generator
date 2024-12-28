@@ -1,0 +1,139 @@
+/******************************************************************************
+START Glitch hello-app default styles
+
+The styles in this section do some minimal CSS resets, set default fonts and 
+colors, and handle the layout for our footer and "Remix on Glitch" button. If
+you're new to CSS they may seem a little complicated, but you can scroll down
+to this section's matching END comment to see page-specific styles.
+******************************************************************************/
+/* Our default values set as CSS variables */
+:root {
+  --color-bg: #99ffa0;
+  --color-text-main: #000000;
+  --color-primary: #afece0;
+  --wrapper-height: 85vh;
+  --image-max-width: 320px;
+  --font-family: "HK Grotesk";
+  --font-family-header: "HK Grotesk";
+}
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+
+/* Import fonts */
+@font-face {
+  font-family: HK Grotesk;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Regular.otf?v=1603136326027")
+    format("opentype");
+}
+@font-face {
+  font-family: HK Grotesk;
+  font-weight: bold;
+  src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
+    format("opentype");
+}
+
+/******************************************************************************
+END Glitch hello-app default styles
+******************************************************************************/
+
+/* Page structure */
+body {
+  font-family: HK Grotesk;
+  background-color: var(--color-bg);
+}
+.wrapper {
+  min-height: var(--wrapper-height);
+  /*   display: grid; */
+  place-items: center;
+  min-height: 86vh;
+  border: none;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 0 1pt black;
+  background-color: white;
+  outline: none;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Page titles */
+h1 {
+  font-family: HK Grotesk;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#output {
+  margin: 1rem;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1rem;
+  text-align: left;
+  width: 100%;
+}
+
+#copy {
+  /*   float: right; */
+}
+
+#input {
+  width: 100%;
+  resize: none;
+}
+
+.inputcontainer {
+  text-align: right;
+  width: 100%;
+}
+
+.boundary {
+  width: 40px;
+}
+
+.step {
+  width: 100%;
+  place-items: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.substep {
+  margin: 0 0 1rem 0;
+}
+
+.links {
+  text-align: right;
+}
+
+#outputcontainer {
+  text-align: right;
+  width: 100%;
+}
+
+.newpromptbutton {
+  margin: 1rem 0;
+}
+
+h2 {
+  margin: 0 0 1rem -1rem;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  padding: 1rem;
+}
